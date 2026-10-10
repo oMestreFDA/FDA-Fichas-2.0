@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Faces do Abismo — Ficha Melhorada</title>
+<style>
+:root{--void:#050508;--abyss:#0c0c14;--panel:#12121d;--panel2:#171724;--line:#2a2a3c;--line2:#43435a;--text:#eeeeF4;--muted:#a9a9bc;--dead:#737388;--gold:#e3c04a;--gold2:#c9a227;--red:#f1748c;--blue:#6fa1e0;--green:#a6d24c;--shadow:0 18px 60px rgba(0,0,0,.35);--display:'Almendra Display','Cormorant Garamond',Georgia,serif;--body:'EB Garamond',Georgia,serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -160px,rgba(201,162,39,.12),transparent 68%),var(--void);color:var(--text);font:18px/1.45 var(--body)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.top{position:sticky;top:0;z-index:50;background:rgba(5,5,8,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.topin{max-width:1440px;margin:auto;padding:11px 18px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.logo{font:1.4rem var(--display);color:var(--gold);margin-right:auto}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:8px 12px;transition:.15s}
+.btn:hover{border-color:var(--gold2);color:var(--gold)}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:#1c1707}
+.btn.danger{border-color:rgba(241,116,140,.45);color:var(--red)}
+.app{max-width:1440px;margin:auto;padding:18px}
+.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:14px}
+.card,.panel,.stat,.ability,.item,.source-row,.resource-shell{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.038),rgba(255,255,255,.015));border-radius:14px;box-shadow:var(--shadow)}
+.card{padding:18px}.hero h1{font:clamp(2.2rem,5vw,4rem)/.95 var(--display);margin:.15rem 0 .5rem;color:var(--gold)}
+.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--dead)}
+h2{font:1.65rem var(--display);color:var(--gold);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font:1.12rem var(--display);margin:16px 0 8px}
+.grid2,.grid3,.grid4{display:grid;gap:12px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:5px}
+input[type=text],input[type=number],select,textarea{width:100%;background:#090910;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px 10px;outline:none}
+textarea{min-height:100px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(227,192,74,.08)}
+.small{font-size:.82rem;color:var(--muted)}
+.notice{background:rgba(111,161,224,.06);border-left:3px solid var(--blue);padding:10px 12px;border-radius:9px;color:#ccd8e9}
+.warn{background:rgba(241,116,140,.06);border-left:3px solid var(--red);padding:10px 12px;border-radius:9px;color:#efc0c9}
+.ok{color:var(--green)}
+.quickstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stat{padding:11px;text-align:center;box-shadow:none}
+.stat .k{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dead)}
+.stat .v{font:1.7rem var(--display);color:var(--gold);margin-top:2px}
+.stat input{border:0;background:transparent;text-align:center;font:1.3rem var(--display);padding:2px;color:var(--text);width:100%;}
+.tabs{display:flex;gap:7px;overflow-x:auto;padding:10px 0 4px;position:sticky;top:61px;z-index:40;background:linear-gradient(var(--void) 65%,transparent); scrollbar-width: none;}
+.tabs::-webkit-scrollbar { display: none; }
+.tab{white-space:nowrap}
+.tab.active{background:var(--gold);border-color:var(--gold);color:#171204}
+.panel{padding:16px;margin-top:14px;box-shadow:none; overflow-x: hidden;}
+.chip{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px 9px;color:var(--muted);font-size:.75rem;margin:2px}
+.chip.race{border-color:rgba(166,210,76,.35);color:var(--green)}
+.chip.vertent{border-color:rgba(111,161,224,.35);color:var(--blue)}
+.chip.class{border-color:rgba(241,116,140,.35);color:var(--red)}
+.chip.spec{border-color:rgba(227,192,74,.35);color:var(--gold)}
+.attr-card{padding:13px}
+.attr-head{display:flex;align-items:center;justify-content:space-between}
+.attr-name{font:1.1rem var(--display);color:var(--text)}
+.attr-val{font:1.8rem var(--display);color:var(--gold)}
+.attr-buttons{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}
+.budget-line{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:10px}
+.budget-value{font:1.1rem var(--display);color:var(--gold)}
+.skill-row{display:grid;grid-template-columns:1.2fr 65px 65px 65px;gap:8px;align-items:center;padding:9px 10px;margin:7px 0;box-shadow:none; background:rgba(0,0,0,0.1); border-radius:10px;}
+.skill-name{font-weight:700}
+.skill-total{text-align:center;font:1.12rem var(--display);color:var(--gold)}
+.resource-shell{display:grid;grid-template-columns:1.25fr .75fr;overflow:hidden;box-shadow:none}
+.resource-main,.resource-side{padding:17px}
+.resource-side{border-left:1px solid var(--line);background:rgba(0,0,0,.12)}
+.resource-title{font:1.7rem var(--display);color:var(--gold)}
+.resource-badge{display:inline-block;border:1px solid rgba(227,192,74,.35);color:var(--gold);border-radius:999px;padding:4px 9px;text-transform:uppercase;letter-spacing:.11em;font-size:.68rem}
+.resource-tools{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:8px;margin-top:12px}
+.tool{padding:10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.018)}
+.meter{height:10px;border:1px solid var(--line);background:#08080d;border-radius:99px;overflow:hidden}
+.meter>span{display:block;height:100%;width:0;background:var(--gold);transition:.15s}
+.meter-value{font:2rem var(--display);color:var(--gold);text-align:center;margin:9px 0}
+.meter-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ability{padding:15px;box-shadow:none;margin:9px 0}
+.inventory-head{display:grid;gap:8px;padding:0 7px 5px;color:var(--dead);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;align-items: center;}
+.inventory-row{display:grid;gap:8px;align-items:center;padding:8px;margin:6px 0;background:rgba(0,0,0,.12);border-radius:10px;}
+.inventory-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.condition-card { border:1px solid var(--line); padding:10px; border-radius:10px; background:rgba(0,0,0,.12); }
+footer{text-align:center;color:var(--dead);padding:28px 0 45px;font-size:.8rem}
+
+@media(max-width:1050px){
+  .hero,.resource-shell{grid-template-columns:1fr}
+  .resource-side{border-left:0;border-top:1px solid var(--line)}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:680px){
+  body{font-size:17px}
+  .app{padding:10px}
+  .topin{padding:9px 10px}
+  .logo{width:100%;margin-right:0}
+  .tabs{top:81px; flex-wrap: nowrap;}
+  .grid2,.grid3,.grid4,.market-grid,.check-grid{grid-template-columns:1fr}
+  .quickstats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skill-row { grid-template-columns: 1fr 50px 50px 50px; font-size: 0.85rem; }
+  .skill-row input { padding: 4px; font-size: 0.9rem;}
+  .inventory-row, .inventory-head { grid-template-columns: 1fr 50px 50px 80px 100px 40px !important; font-size:0.75rem;}
+  .inventory-row input, .inventory-row select { padding: 4px; font-size: 0.8rem;}
+  .resource-tools{grid-template-columns:1fr}
+  .panel { overflow-x: auto; }
+}
+@media print{
+  body{background:#fff;color:#111}
+  .top,.tabs,.no-print,.btn{display:none!important}
+  .panel,.card,.stat,.ability,.inventory-row,.resource-shell{background:#fff;border-color:#aaa;box-shadow:none}
+  .app{max-width:none}
+  .eyebrow,.small,label,.inventory-head{color:#555}
+  .hero h1,h2,.stat .v,.attr-val,.budget-value,.resource-title,.meter-value,.ability-name,.skill-total{color:#111}
+  .hidden{display:block!important}
+  .tab-pane{display:block!important}
+  .tab-pane:not(#tab-summary)::before{content:''}
+  .panel{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="top no-print">
+  <div class="topin">
+    <div class="logo">Faces do Abismo · Ficha</div>
+    <button class="btn" id="saveBtn">Salvar agora</button>
+    <button class="btn primary" id="exportBtn">Exportar JSON</button>
+    <label class="btn" style="margin:0">Importar JSON<input id="importInput" type="file" accept="application/json,.json" hidden></label>
+    <button class="btn" id="printBtn">Imprimir / PDF</button>
+    <button class="btn danger" id="newBtn">Nova ficha</button>
+  </div>
+</div>
+<div class="app">
+<section class="hero">
+ <div class="card">
+   <div class="eyebrow">Sistema de RPG · Nexia</div>
+   <h1>Faces do Abismo</h1>
+   <div class="grid3">
+     <div><label>Personagem</label><input data-bind="name" type="text" placeholder="Nome"></div>
+     <div><label>Jogador</label><input data-bind="player" type="text" placeholder="Nome"></div>
+     <div><label>Campanha</label><input data-bind="campaign" type="text" placeholder="Campanha"></div>
+   </div>
+ </div>
+ <div class="card">
+   <div class="eyebrow">Valores derivados</div>
+   <div class="quickstats" style="margin-top:8px">
+     <div class="stat"><div class="k">PV Máx.</div><div class="v" id="hpMax">0</div></div>
+     <div class="stat"><div class="k">Defesa</div><div class="v" id="defense">0</div></div>
+     <div class="stat"><div class="k">Desloc.</div><div class="v" id="move">0m</div></div>
+     <div class="stat"><div class="k">Mana</div><div class="v" id="manaMax">0</div></div>
+     <div class="stat"><div class="k">Lanto</div><div class="v" id="lantoMax">0</div></div>
+     <div class="stat"><div class="k">Carga</div><div class="v" id="capacityTop">0/0</div></div>
+   </div>
+ </div>
+</section>
+
+<nav class="tabs no-print">
+  <button class="btn tab active" data-tab="summary">Resumo</button>
+  <button class="btn tab" data-tab="build">Construção</button>
+  <button class="btn tab" data-tab="skills">Perícias</button>
+  <button class="btn tab" data-tab="powers">Poder & Habilidades</button>
+  <button class="btn tab" data-tab="inventory">Inventário</button>
+  <button class="btn tab" data-tab="combat">Combate</button>
+  <button class="btn tab" data-tab="story">História & Mesa</button>
+</nav>
+
+<div class="tab-pane" id="tab-summary">
+ <section class="panel">
+   <h2>Estado atual</h2>
+   <div class="grid4">
+     <div class="stat"><div class="k">PV Atual</div><input data-bind="hpCurrent" type="number" min="0"></div>
+     <div class="stat"><div class="k" id="powerCurrentLabel">Mana Atual</div><input data-bind="powerCurrent" type="number" min="0"></div>
+     <div class="stat"><div class="k">Cansaço</div><input data-bind="fatigueCurrent" type="number" min="0"></div>
+     <div class="stat"><div class="k">Determinação</div><input data-bind="determination" type="number" min="0" max="3"></div>
+   </div>
+   <div class="notice" style="margin-top:12px">A ficha mantém os valores calculados automaticamente; durante a mesa você altera apenas os valores atuais e os efeitos temporários.</div>
+ </section>
+ <section class="panel">
+   <h2>Construção rápida</h2>
+   <div class="grid4">
+     <div><label>Rank</label><select data-bind="rank" id="rankSelect"></select></div>
+     <div><label>Raça</label><select data-bind="race" id="raceSelect"></select></div>
+     <div><label>Vertente / Ofício</label><select data-bind="vertent" id="vertentSelect"></select></div>
+     <div><label>Classe</label><select data-bind="class" id="classSelect"></select></div>
+   </div>
+ </section>
+ <section class="panel">
+   <h2>Âncoras</h2>
+   <div class="grid3">
+     <div><label>Objetivo</label><textarea data-bind="goal"></textarea></div>
+     <div><label>Medo</label><textarea data-bind="fear"></textarea></div>
+     <div><label>Vínculo</label><textarea data-bind="bond"></textarea></div>
+     <div><label>Complicação</label><textarea data-bind="complication"></textarea></div>
+     <div><label>Limitação Central</label><textarea data-bind="centralLimit"></textarea></div>
+     <div><label>Notas rápidas</label><textarea data-bind="notes"></textarea></div>
+   </div>
+ </section>
+</div>
+
+<div class="tab-pane hidden" id="tab-build">
+ <section class="panel">
+   <h2>Identidade mecânica</h2>
+   <div class="grid3">
+     <div><label>Raça</label><select data-bind="race" id="raceSelect2"></select></div>
+     <div><label>Vertente / Ofício</label><select data-bind="vertent" id="vertentSelect2"></select></div>
+     <div><label>Classe</label><select data-bind="class" id="classSelect2"></select></div>
+     <div><label>Fonte de Poder</label><select data-bind="source" id="sourceSelect"><option>Mana</option><option>Lanto</option></select></div>
+     <div><label>Expressão / Caminho</label><select data-bind="expression" id="expressionSelect"></select></div>
+     <div><label>Vértice</label><select data-bind="vertex"><option>Vestígio</option><option>Emanação</option><option>Vínculo</option></select></div>
+   </div>
+   <div style="margin-top:12px">
+     <label>Assinatura de Poder</label><input data-bind="powerSignature" type="text" placeholder="Estética, símbolo, regra ou forma recorrente">
+   </div>
+   <div id="lineageBox" class="notice" style="margin-top:12px"></div>
+ </section>
+ <section class="panel">
+   <h2>Atributos</h2>
+   <div class="small">O Livro Básico separa o limite/pontos do Rank dos aumentos narrativos.</div>
+   <div class="grid3" id="attributesGrid" style="margin-top:12px"></div>
+   <div class="budget-line"><span>Pontos totais do Rank</span><span class="budget-value" id="attrTotal"></span></div>
+   <div class="budget-line"><span>Pontos de Atributo restantes</span><span class="budget-value" id="attrLeft"></span></div>
+   <div class="budget-line"><span>Máximo por Atributo</span><span class="budget-value" id="attrMax"></span></div>
+ </section>
+ <section class="panel">
+   <h2>Proficiências de Raça</h2>
+   <div id="racialProfBox"></div>
+ </section>
+</div>
+
+<div class="tab-pane hidden" id="tab-skills">
+ <section class="panel">
+   <h2>Perícias</h2>
+   <div class="small">Os pontos investidos pertencem à Perícia. Utilize a coluna "Extra" para modificadores temporários ou bônus de equipamentos.</div>
+   <div class="budget-line">
+     <span>Pontos de Perícia usados / limite do Rank</span>
+     <span class="budget-value"><span id="skillUsed">0</span> / <span id="skillBudget">12</span></span>
+   </div>
+   <div id="skillsGrid" style="margin-top:10px"></div>
+ </section>
+ <section class="panel">
+   <h2>Especializações</h2>
+   <div class="small">O Livro Básico pede 2 Especializações na ficha.</div>
+   <div class="grid2" style="margin-top:10px">
+     <select id="spec1" data-spec="0"></select>
+     <select id="spec2" data-spec="1"></select>
+   </div>
+   <div class="notice" style="margin-top:10px">No Rank Elite, a Especialização de Perícia ganha a regra específica de <b>+1 uma vez por cena</b>.</div>
+ </section>
+</div>
+
+<div class="tab-pane hidden" id="tab-powers">
+ <section class="panel">
+   <h2>Fonte e Potência</h2>
+   <div class="quickstats">
+     <div class="stat"><div class="k">Fonte</div><div class="v" id="sourceLabel">Mana</div></div>
+     <div class="stat"><div class="k">Expressão / Caminho</div><div class="v" id="expressionLabel" style="font-size:1.15rem">Pyroclasta</div></div>
+     <div class="stat"><div class="k">Potência máxima</div><div class="v" id="powerLimit">3</div></div>
+   </div>
+ </section>
+ <section class="panel">
+   <h2>Habilidades</h2>
+   <div class="small" style="margin-bottom:15px">Liste aqui seus poderes, magias, invocações ou golpes especiais criados.</div>
+   <div id="abilitiesList"></div>
+   <button class="btn primary" id="addAbilityBtn" style="margin-top:10px">+ Criar habilidade</button>
+ </section>
+</div>
+
+<div class="tab-pane hidden" id="tab-inventory">
+ <section class="panel">
+   <h2>Capacidade</h2>
+   <div class="inventory-summary">
+     <div class="stat"><div class="k">Base da Raça</div><div class="v" id="capBase">0</div></div>
+     <div class="stat"><div class="k">Bônus de Recipientes</div><div class="v" id="capBonus">0</div></div>
+     <div class="stat"><div class="k">Máximo Total</div><div class="v" id="capTotal">0</div></div>
+   </div>
+   <div class="budget-line"><span>Espaços usados</span><span class="budget-value" id="capUsed">0</span></div>
+   <div id="capStatus" style="margin-top:8px"></div>
+   <div class="small" style="margin-top:8px">Espaços representam capacidade prática de transporte, não quilogramas.</div>
+ </section>
+ <section class="panel">
+   <h2>Inventário</h2>
+   <div id="inventoryContainer"></div>
+   <button class="btn primary" id="addItemBtn" style="margin-top:10px">+ Adicionar item</button>
+ </section>
+</div>
+
+<div class="tab-pane hidden" id="tab-combat">
+  <section class="panel" id="combatResourceSection">
+    <div class="resource-shell">
+      <div class="resource-main">
+        <div class="resource-badge">Classe</div>
+        <div class="resource-title" id="resourceTitle">Recurso</div>
+        <div id="resourceDesc" class="small" style="font-size:.95rem;margin-top:5px"></div>
+        <div class="eyebrow" style="margin-top:14px">O que isso faz:</div>
+        <div id="resourceTools" class="resource-tools"></div>
+      </div>
+      <div class="resource-side">
+        <div class="eyebrow">Controle em jogo</div>
+        <div class="meter-value">
+          <span id="resourceCurrentDisplay">0</span><span style="font-size:1rem;color:var(--dead)"> / <span id="resourceMax">0</span></span>
+        </div>
+        <div class="meter"><span id="resourceProgress"></span></div>
+        <input data-bind="resourceCurrent" id="resourceCurrentInput" type="number" min="0" style="text-align:center;margin-top:11px">
+        <div class="meter-buttons">
+          <button class="btn" id="resourceMinus">− 1</button>
+          <button class="btn primary" id="resourcePlus">+ 1</button>
+        </div>
+        <div class="small" style="margin-top:9px" id="resourceHint"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+      <h2>Turno e Ações</h2>
+      <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:15px;">
+          <label style="display:flex; align-items:center; gap:5px; font-size:1.1rem; color:var(--text);"><input type="checkbox" id="turn_action" style="width:20px; height:20px;"> Ação Principal</label>
+          <label style="display:flex; align-items:center; gap:5px; font-size:1.1rem; color:var(--text);"><input type="checkbox" id="turn_bonus" style="width:20px; height:20px;"> Ação Bônus</label>
+          <label style="display:flex; align-items:center; gap:5px; font-size:1.1rem; color:var(--text);"><input type="checkbox" id="turn_move" style="width:20px; height:20px;"> Movimento</label>
+          <label style="display:flex; align-items:center; gap:5px; font-size:1.1rem; color:var(--text);"><input type="checkbox" id="turn_reaction" style="width:20px; height:20px;"> Reação</label>
+      </div>
+      <button class="btn" id="resetTurnBtn">Resetar Turno</button>
+  </section>
+
+  <section class="panel">
+      <h2>Armas de Combate</h2>
+      <div class="inventory-head" style="grid-template-columns: 1.2fr 80px 80px 1.5fr 80px;">
+          <div>Arma</div><div>Ataque</div><div>Dano</div><div>Efeito / Notas</div><div></div>
+      </div>
+      <div id="combatWeaponsList"></div>
+      <button class="btn primary" id="addWeaponBtn" style="margin-top:10px">+ Adicionar Arma</button>
+  </section>
+
+  <section class="panel">
+      <h2>Condições e Marcadores</h2>
+      <div class="grid3" id="conditionsGrid"></div>
+  </section>
+
+  <section class="panel">
+      <h2>Anotações de Combate</h2>
+      <textarea data-bind="combatNotes" style="min-height:160px;" placeholder="Use esse espaço para anotar quem tem cobertura, buffs temporários da equipe, efeitos persistentes ou pontos focais da batalha."></textarea>
+  </section>
+</div>
+
+<div class="tab-pane hidden" id="tab-story">
+ <section class="panel">
+   <h2>Corpo e aparência</h2>
+   <div class="grid4">
+     <div><label>Altura</label><input data-bind="height" type="text"></div>
+     <div><label>Peso</label><input data-bind="weight" type="text"></div>
+     <div><label>Idade</label><input data-bind="age" type="text"></div>
+     <div><label>Origem / local de nascimento</label><input data-bind="origin" type="text"></div>
+   </div>
+   <div class="grid2" style="margin-top:12px">
+     <div><label>Aparência</label><textarea data-bind="appearance"></textarea></div>
+     <div><label>Personalidade</label><textarea data-bind="personality"></textarea></div>
+   </div>
+ </section>
+ <section class="panel">
+   <h2>História</h2>
+   <textarea data-bind="history" style="min-height:260px" placeholder="Origem, acontecimentos, pessoas, lugares e tudo que a personagem carrega consigo..."></textarea>
+ </section>
+ <section class="panel">
+   <h2>Notas da mesa</h2>
+   <textarea data-bind="notes" style="min-height:180px"></textarea>
+ </section>
+</div>
+<footer>Faces do Abismo · ficha local-first · salve, exporte e transporte seu JSON sem depender de armazenamento online.</footer>
+</div>
+<script>
+const DATA = {
+  "races": {
+    "Anões": {"hp": 26, "move": 6, "capacity": 12, "lineage": ["Corpo", "Intelecto"], "profs": ["Ofício", "Forja", "Resistência"]},
+    "Demônios": {"hp": 24, "move": 8, "capacity": 10, "lineage": ["Espírito", "Presença"], "profs": ["Intimidação", "Magia", "Controle Emocional"]},
+    "Elfos": {"hp": 22, "move": 10, "capacity": 9, "lineage": ["Instinto", "Espírito"], "profs": ["Percepção", "Sobrevivência", "Magia"]},
+    "Humanos": {"hp": 24, "move": 8, "capacity": 10, "lineage": ["ESCOLHA", "ESCOLHA"], "profs": "DUAS"},
+    "Kith": {"hp": 24, "move": 9, "capacity": 10, "lineage": ["Agilidade", "Instinto"], "profs": ["Percepção", "Sobrevivência", "Atletismo", "Rastreamento"]},
+    "Lith": {"hp": 28, "move": 6, "capacity": 13, "lineage": ["Corpo", "Intelecto"], "profs": ["Resistência", "Tecnologia", "Ofício", "Investigação"]},
+    "Vazias": {"hp": 22, "move": 8, "capacity": 9, "lineage": ["Intelecto", "Espírito"], "profs": ["Tecnologia", "Ofício", "Investigação", "Controle Emocional"]},
+    "Ghar": {"hp": 26, "move": 8, "capacity": 12, "lineage": ["Corpo", "Instinto"], "profs": ["Sobrevivência", "Ofício", "Resistência", "Alquimia"]},
+    "Marrow": {"hp": 24, "move": 8, "capacity": 10, "lineage": ["Agilidade", "Espírito"], "profs": ["Atletismo", "Sobrevivência", "Rastreamento", "Percepção"]},
+    "Brach": {"hp": 26, "move": 8, "capacity": 11, "lineage": ["Agilidade", "Intelecto"], "profs": ["Acrobacia", "Ofício", "Tecnologia", "Atletismo"]}
+  },
+  "vertents": {
+    "Anões": [["Sangue-de-Ferro", "Forja", 2], ["Engenheiros das Dunas", "Tecnologia", -2], ["Guardiões da Fortaleza", "Defesa", 2], ["Andarilhos do Sol", "Sobrevivência", -2], ["Escultores de Almas", "Ofício", -2], ["Caçadores de Vermiliths", "Caça a Monstros", 2]],
+    "Demônios": [["Rubros", "Persuasão", 0], ["Gálios", "Intimidação", 0], ["Feros", "Rastreamento", 2]],
+    "Elfos": [["Quartzo", "Sobrevivência", 0], ["Tanzanita", "Furtividade", 0], ["Rubi", "Armas Pesadas", 0], ["Diamante Negro", "Percepção", 0], ["Safira", "Navegação", 0], ["Diamante", "Medicina", 0], ["Topázio Imperial", "Performance", 0], ["Citrino", "Tecnologia", 0], ["Ametista", "História", 0], ["Esmeralda", "Sobrevivência", 0], ["Morganita", "Controle Emocional", 0], ["Água-Marinha", "Medicina", 0]],
+    "Humanos": [["Aristocratas das Casas", "Persuasão", -2], ["Devotos do Jardim", "Medicina", -2], ["Vanguarda da Fronteira", "Sobrevivência", 0], ["Operários Urbanos", "Ofício", 0], ["Cavaleiros das Planícies", "Cavalgar", 0]],
+    "Kith": [["Félidos", "Furtividade", 0], ["Ursinos", "Atletismo", 2], ["Corvinos", "Lanto", -2], ["Serpentinos", "Alquimia", -2]],
+    "Lith": [["Geodos", "Investigação", 0], ["Profundezas", "Intimidação", 2]],
+    "Vazias": [["Marionetes", "Atuação", -2], ["Relicários", "Ocultismo", 0], ["Tecelãs", "Furtividade", -2], ["Autômatos de Relíquia", "Tecnologia", 0]],
+    "Ghar": [["Fundentes", "Forja", 0], ["Rachaduras", "Medicina", 0], ["Caravanas", "Navegação", -2], ["Sombreados", "Furtividade", -2]],
+    "Marrow": [["Abissais", "Resistência", 2], ["Tempestades", "Navegação", 0], ["Recifes", "Construção", 0], ["Profundezas", "Intimidação", 0]],
+    "Brach": [["Tecelões", "Acrobacia", 0], ["Construtores", "Atletismo", 2], ["Cirurgiões", "Medicina", 0], ["Guardiões", "Armas", 2], ["Artífices", "Tecnologia", 0], ["Cavaleiros das Alturas", "Acrobacia", 0]]
+  },
+  "classes": {
+    "Guerreiro": {
+      "resource": "Posturas", "kind": "state", "max": 0, "rule": "Sempre está em uma Postura. Pode trocar de Postura com Ação Bônus.",
+      "tools": ["Ofensiva: +1 dano / -1 Defesa.", "Defensiva: +1 Defesa / -1 Dano.", "Tática: +1 em manobras de combate e permite reações de reposicionamento de 1m passo."]
+    },
+    "Berserker": {
+      "resource": "Fúria", "kind": "meter", "max": 5, "rule": "Fúria vai de 0 a 5. Ganha sofrendo/causando dano ou sob condições adversas.",
+      "tools": ["Níveis 2 a 4: Concedem bônus crescentes de dano e Resistência (até +2).", "Nível 5: Permite o Êxtase da Batalha (Fúria Máxima), dando acesso a manobras extremas custando todos os pontos."]
+    },
+    "Atirador": {
+      "resource": "Preparação", "kind": "meter", "max": 2, "rule": "Pode manter até duas Preparações simultâneas definindo um Gatilho e uma Resposta.",
+      "tools": ["Disparo Preparado: +2 Ataque (com Dano Extra se o alvo abrir a guarda).", "Cobertura: Gasta preparações para +2 Defesa reativa.", "Mira: Gasta preparações para focar o próximo disparo."]
+    },
+    "Ladino": {
+      "resource": "Oportunidades", "kind": "meter", "max": 3, "rule": "Acumula 0 a 3 Oportunidades esquivando, explorando surpresas ou atacando alvos caídos.",
+      "tools": ["Golpe Oportunista (1): +1d6 dano após acertar.", "Passo Fantasma (1): Mover 3m sem Reações após uma ação.", "Interrupção (2): Tentar cancelar ação próxima do alvo via Reflexos."]
+    },
+    "Arcanista": {
+      "resource": "Moldagem", "kind": "meter", "max": 2, "rule": "Possui 2 Pontos de Moldagem por cena para alterar parâmetros de habilidades usadas.",
+      "tools": ["Alcance: +4 metros.", "Área: +2m de raio.", "Duração/Dano: +1 rodada ou +2 de Dano/Cura.", "Forma Maior (2 pts): Muda múltiplos parâmetros de uma só vez."]
+    },
+    "Guardião": {
+      "resource": "Juramentos", "kind": "meter", "max": 3, "rule": "Possui 3 Pontos de Juramento por cena e os recupera ao final da cena. Focados em proteger.",
+      "tools": ["Interposição (1): Toma o lugar/dano de um aliado próximo.", "Escudo do Juramento (1): Reduz dano de aliado.", "Última Linha (2): Impede um aliado de cair a 0 PV (Fica com 1 PV, você sofre Dano Verdadeiro)."]
+    },
+    "Druida": {
+      "resource": "Formas", "kind": "state", "max": 3, "rule": "Conhece Formas limitadas. Pode alterar com Ação bônus (Gera Cansaço após 2 trocas livres).",
+      "tools": ["Forma do Predador: Maior deslocamento, dano e furtividade.", "Forma do Guardião: Bônus massivo em Defesa e Resistência, com lentidão.", "Forma do Rastreador: Sentidos, Percepção e Sobrevivência."]
+    },
+    "Xamã": {
+      "resource": "Vínculo", "kind": "state", "max": 3, "rule": "Mantém Vínculos Espirituais. Um espírito pode estar manifestado por vez, possuindo PVs e Defesa.",
+      "tools": ["Escudo (Defesa/Proteção em área).", "Olho (Revela inimigos).", "Raiz (Restringe deslocamento).", "Canalização (Usar suas próprias magias a partir da posição do Espírito)."]
+    },
+    "Bardo": {
+      "resource": "Ritmo", "kind": "meter", "max": 5, "rule": "Ritmo (0-5) cresce apoiando e causando condições no fluxo de combate. Não se escolhe postura, apenas acumula.",
+      "tools": ["Nota de Coragem (1 pt): Tira 1d4 do resultado de teste de aliado.", "Compasso (2 pts): Dá passo livre ao aliado.", "Clímax (5 pts): Buff extremo no grupo inteiro reduzindo resultado e melhorando defesas em área."]
+    },
+    "Monge": {
+      "resource": "Fluxo", "kind": "meter", "max": 5, "rule": "Fluxo (0-5) cresce ao encadear AÇÕES DIFERENTES no turno (Mover -> Atacar -> Controlar). Imobilidade zera o fluxo.",
+      "tools": ["Passo Vazio (1 pt): Mover rápido de 3m.", "Punho Encadeado (2 pts): Golpe extra.", "Corpo Vazio (3 pts): Bônus Defensivo.", "Mil Movimentos (5 pts): Combo extremo de golpes e movimentos sucessivos."]
+    },
+    "Artífice": {
+      "resource": "Preparos", "kind": "meter", "max": 6, "rule": "Administra Componentes (6 por cena) p/ criar Bombas, Torretas, Engenhocas e Soluções improvisadas.",
+      "tools": ["Componente Básico (1): Bombas, fumaça, reparos.", "Avançado (2): Torreta com dano/PV próprio, armadilhas pesadas.", "Excepcional / Improviso (3+): Modificar efeitos para se ajustar na hora ou inventar engenhocas únicas."]
+    },
+    "Conjurador": {
+      "resource": "Manifesto", "kind": "state", "max": 1, "rule": "Controla uma criatura invocada permanente com Status e HP próprios. Deve manter ela em seu alcance.",
+      "tools": ["Você controla ela dando Comandos livres em seu turno.", "Sua manifestação usa Habilidades Especiais mas acumula Desgaste.", "A distância desfaz o vínculo, e se ela morrer, você sofre cansaço grave."]
+    }
+  },
+  "skills": {
+    "Corpo": ["Força", "Atletismo", "Resistência", "Luta"],
+    "Agilidade": ["Acrobacia", "Furtividade", "Pontaria", "Reflexos"],
+    "Intelecto": ["Investigação", "Ciências", "História", "Tecnologia", "Lanto"],
+    "Presença": ["Diplomacia", "Enganação", "Intimidação", "Liderança"],
+    "Instinto": ["Percepção", "Intuição", "Sobrevivência", "Rastreamento"],
+    "Espírito": ["Controle Emocional", "Resistência Psíquica", "Medicina", "Magia"]
+  },
+  "ranks": [
+    ["Civil", 3, 1, 6, 3, 12], ["Desperto", 4, 2, 8, 3, 16], ["Forjado", 5, 2, 10, 4, 20],
+    ["Veterano", 6, 3, 12, 4, 24], ["Elite", 7, 3, 14, 5, 28], ["Legado", 8, 3, 16, 5, 32],
+    ["Sacro", 9, 4, 18, 6, 36], ["Nexo", 10, 4, 20, 6, 40], ["Trono", 11, 4, 22, 6, 44],
+    ["Imperial", 12, 4, 24, 6, 48]
+  ],
+  "conditions": ["Caído", "Atordoado", "Imobilizado", "Oculto", "Envenenado", "Sangrando", "Amedrontado", "Exausto"]
+};
+const CONDITION_DEFS = {
+  "Caído": ["Grau I: Deslocamento reduzido à metade.", "Grau II: Sofre ataques corpo-a-corpo com desvantagem.", "Grau III: Não pode se levantar sem ajuda ou ação completa."],
+  "Atordoado": ["Grau I: Perde a Reação no turno.", "Grau II: Move-se ou age (não ambos).", "Grau III: Incapacitado, falha automática em testes físicos."],
+  "Imobilizado": ["Grau I: Deslocamento zero.", "Grau II: -2 na Defesa.", "Grau III: Concede vantagem total a ataques inimigos (Abertura)."],
+  "Oculto": ["Grau I: Difícil de ser percebido (+2 p/ inimigos em Percepção).", "Grau II: Invisível em penumbra, permite ataques furtivos.", "Grau III: Indetectável sem sentidos ou magias especiais."],
+  "Envenenado": ["Grau I: Dano contínuo leve.", "Grau II: Dano moderado e penalidade em testes físicos.", "Grau III: Risco de morte, falhas automáticas de Resistência."],
+  "Sangrando": ["Grau I: Dano raso ao realizar ações vigorosas.", "Grau II: Dano contínuo obrigatório por turno.", "Grau III: Fraqueza severa, perda de consciência próxima."],
+  "Amedrontado": ["Grau I: Não pode avançar na direção do alvo do medo.", "Grau II: Penalidade severa em todos os testes próximos.", "Grau III: Fuga forçada incontrolável ou paralisia."],
+  "Exausto": ["Grau I: Penalidade de -1 em testes.", "Grau II: Deslocamento pela metade, -2 em testes gerais.", "Grau III: PV Máximo cai, risco de colapso instantâneo."]
+};
+
+const ATTRS = ["Corpo", "Agilidade", "Intelecto", "Presença", "Instinto", "Espírito"];
+const ALL_SKILLS = ["Força", "Atletismo", "Resistência", "Luta", "Acrobacia", "Furtividade", "Pontaria", "Reflexos", "Investigação", "Ciências", "História", "Tecnologia", "Lanto", "Diplomacia", "Enganação", "Intimidação", "Liderança", "Percepção", "Intuição", "Sobrevivência", "Rastreamento", "Controle Emocional", "Resistência Psíquica", "Medicina", "Magia"];
+const RANKS = Object.fromEntries(DATA.ranks.map(r => [r[0], { power: r[1], abilities: r[2], attrTotal: r[3], attrMax: r[4], skillBudget: r[5] }]));
+const STORAGE = 'faces-do-abismo-ficha-v3-1';
+
+const BLANK = {
+  "name": "", "player": "", "campaign": "", "rank": "Civil", "race": "Humanos", "vertent": "Vanguarda da Fronteira",
+  "class": "Guerreiro", "source": "Mana", "expression": "Pyroclasta", "vertex": "Vestígio", "powerSignature": "",
+  "height": "", "weight": "", "age": "", "pronouns": "", "appearance": "", "personality": "", "history": "",
+  "goal": "", "fear": "", "bond": "", "complication": "", "centralLimit": "", "notes": "", "combatNotes": "",
+  "attributes": { "Corpo": 1, "Agilidade": 1, "Intelecto": 1, "Presença": 1, "Instinto": 1, "Espírito": 1 },
+  "skills": { "Força": 0, "Atletismo": 0, "Resistência": 0, "Luta": 0, "Acrobacia": 0, "Furtividade": 0, "Pontaria": 0, "Reflexos": 0, "Investigação": 0, "Ciências": 0, "História": 0, "Tecnologia": 0, "Lanto": 0, "Diplomacia": 0, "Enganação": 0, "Intimidação": 0, "Liderança": 0, "Percepção": 0, "Intuição": 0, "Sobrevivência": 0, "Rastreamento": 0, "Controle Emocional": 0, "Resistência Psíquica": 0, "Medicina": 0, "Magia": 0 },
+  "skillExtras": {}, "specializations": ["", ""], "humanLineage": ["Corpo", "Agilidade"], "racialProfs": ["", ""],
+  "resourceCurrent": 0, "hpCurrent": 0, "powerCurrent": 0, "fatigueCurrent": 0, "armor": 0, "defenseBonus": 0, "determination": 1,
+  "abilities": [], "inventory": [], "combatWeapons": [],
+  "turn": { "action": false, "bonus": false, "move": false, "reaction": false },
+  "conditions": { "Caído": 0, "Atordoado": 0, "Imobilizado": 0, "Oculto": 0, "Envenenado": 0, "Sangrando": 0, "Amedrontado": 0, "Exausto": 0 }
+};
+
+let state = load();
+
+function clone(v) { return JSON.parse(JSON.stringify(v)); }
+function normalize(x) {
+  const y = clone(BLANK); Object.assign(y, x || {});
+  y.attributes = { ...BLANK.attributes, ...(x?.attributes || {}) };
+  y.skills = { ...BLANK.skills, ...(x?.skills || {}) };
+  // Migração Magia/Lanto -> Magia para fichas antigas
+  if (y.skills['Magia/Lanto'] !== undefined) {
+    y.skills['Magia'] = y.skills['Magia/Lanto'];
+    delete y.skills['Magia/Lanto'];
+  }
+  y.skillExtras = x?.skillExtras || {};
+  
+  y.conditions = { ...BLANK.conditions, ...(x?.conditions || {}) };
+  for(let c of DATA.conditions) {
+      if(typeof y.conditions[c] === 'boolean') y.conditions[c] = y.conditions[c] ? 1 : 0;
+  }
+  
+  y.specializations = Array.isArray(x?.specializations) ? x.specializations.slice(0, 2) : ['', ''];
+  while (y.specializations.length < 2) y.specializations.push('');
+  y.abilities = Array.isArray(x?.abilities) ? x.abilities : [];
+  y.combatWeapons = Array.isArray(x?.combatWeapons) ? x.combatWeapons : [];
+  y.combatNotes = x?.combatNotes || '';
+  y.turn = x?.turn || { action: false, bonus: false, move: false, reaction: false };
+  y.inventory = Array.isArray(x?.inventory) ? x.inventory.map(i => ({ name: i.name || '', spaces: +i.spaces || 0, qty: Math.max(1, +i.qty || 1), capacityBonus: +i.capacityBonus || 0, type: i.type || 'Geral' })) : [];
+  y.racialProfs = Array.isArray(x?.racialProfs) ? x.racialProfs : ['', ''];
+  y.humanLineage = Array.isArray(x?.humanLineage) ? x.humanLineage : ['Corpo', 'Agilidade'];
+  return y;
+}
+function load() { try { const raw = localStorage.getItem(STORAGE); return raw ? normalize(JSON.parse(raw)) : clone(BLANK) } catch { return clone(BLANK) } }
+function save(silent = true) { localStorage.setItem(STORAGE, JSON.stringify(state)); if (!silent) toast('Ficha salva neste dispositivo.') }
+function toast(msg) { let el = document.getElementById('toast'); if (!el) { el = document.createElement('div'); el.id = 'toast'; el.style.cssText = 'position:fixed;z-index:100;right:18px;bottom:18px;background:#141420;border:1px solid #c9a227;color:#e3c04a;padding:11px 14px;border-radius:10px;box-shadow:0 10px 30px #000;transition:.2s'; document.body.appendChild(el) } el.textContent = msg; el.style.opacity = 1; clearTimeout(window._t); window._t = setTimeout(() => el.style.opacity = 0, 1700) }
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m])) }
+function escA(s) { return esc(s).replace(/`/g, '&#96;') }
+function rankRules() { return RANKS[state.rank] || RANKS.Civil }
+function race() { return DATA.races[state.race] || DATA.races.Humanos }
+function vertent() { return (DATA.vertents[state.race] || []).find(v => v[0] === state.vertent) || ['', '', 0] }
+function attr(a) { return +state.attributes[a] || 1 }
+function lineageAdjusted(a) { let n = attr(a); if (state.race === 'Humanos' && state.humanLineage.includes(a)) n += 1; else if (race().lineage.includes(a)) n += 1; return n }
+function derived() { const v = vertent(); const hp = race().hp + (+v[2] || 0) + (lineageAdjusted('Corpo') * 4); const def = 10 - (lineageAdjusted('Agilidade') * 2) - (+state.defenseBonus || 0) - (+state.armor || 0); const mana = 4 + (lineageAdjusted('Espírito') * 3); const lanto = 4 + (lineageAdjusted('Intelecto') * 3); const cap = race().capacity; const capBonus = state.inventory.reduce((s, i) => s + (+i.capacityBonus || 0) * (+i.qty || 1), 0); const used = state.inventory.reduce((s, i) => s + (+i.spaces || 0) * (+i.qty || 1), 0); return { hp, def, mana, lanto, cap, capBonus, used, move: race().move } }
+function setSelect(id, items, val, firstPlaceholder = false) { const el = document.getElementById(id); if (!el) return; el.innerHTML = ''; if (firstPlaceholder) { const o = document.createElement('option'); o.value = ''; o.textContent = '—'; el.appendChild(o) } items.forEach(x => { const o = document.createElement('option'); o.value = x; o.textContent = x; el.appendChild(o) }); if (items.includes(val)) el.value = val; else if (firstPlaceholder) el.value = ''; else if (items[0]) el.value = items[0] }
+function syncInputs() { document.querySelectorAll('[data-bind]').forEach(el => { const k = el.dataset.bind; if (el.type === 'checkbox') el.checked = !!state[k]; else if (document.activeElement !== el) el.value = state[k] ?? '' }) }
+function bind() { document.querySelectorAll('[data-bind]').forEach(el => { const k = el.dataset.bind; const ev = el.tagName === 'SELECT' || el.type === 'number' || el.type === 'checkbox' ? 'change' : 'input'; el.addEventListener(ev, () => { state[k] = el.type === 'checkbox' ? el.checked : el.type === 'number' ? Number(el.value) : el.value; handleChange(k) }) }) }
+function handleChange(k) { if (['race', 'vertent', 'class', 'source', 'rank'].includes(k)) { if (k === 'race') { state.vertent = (DATA.vertents[state.race] || [])[0]?.[0] || ''; state.racialProfs = ['', '']; } if (k === 'source') { state.expression = state.source === 'Mana' ? 'Pyroclasta' : 'Inércia'; state.powerCurrent = 0 } if (k === 'class') state.resourceCurrent = 0; } renderAll(); save(true) }
+function renderBuildSelects() { const ranks = DATA.ranks.map(r => r[0]); const races = Object.keys(DATA.races); const classes = Object.keys(DATA.classes); const verts = (DATA.vertents[state.race] || []).map(v => v[0]); for (const id of ['rankSelect']) setSelect(id, ranks, state.rank); for (const id of ['raceSelect', 'raceSelect2']) setSelect(id, races, state.race); for (const id of ['vertentSelect', 'vertentSelect2']) setSelect(id, verts, state.vertent); for (const id of ['classSelect', 'classSelect2']) setSelect(id, classes, state.class); setSelect('expressionSelect', state.source === 'Mana' ? ['Pyroclasta', 'Cristalina', 'Terrana', 'Aérea', 'Hídrica', 'Ômega'] : ['Inércia', 'Catalise', 'Fluxo', 'Limite', 'Harmonia', 'Ruína'], state.expression); ['raceSelect2', 'vertentSelect2', 'classSelect2'].forEach(id => { const el = document.getElementById(id); if (el) el.onchange = () => { state[el.dataset.bind] = el.value; handleChange(el.dataset.bind) } }) }
+function renderAttributes() { const g = document.getElementById('attributesGrid'); g.innerHTML = ''; const rr = rankRules(); ATTRS.forEach(a => { const d = document.createElement('div'); d.className = 'card attr-card'; const v = attr(a); d.innerHTML = `<div class="attr-head"><span class="attr-name">${esc(a)}</span><span class="attr-val">${v}</span></div><div class="small">máx. ${rr.attrMax}</div><div class="attr-buttons"><button class="btn" data-a="${escA(a)}" data-d="-1">−</button><button class="btn primary" data-a="${escA(a)}" data-d="1">+</button></div>`; g.appendChild(d) }); g.querySelectorAll('button').forEach(b => b.onclick = () => changeAttr(b.dataset.a, +b.dataset.d)); const total = Object.values(state.attributes).reduce((s, v) => s + (+v || 0), 0); document.getElementById('attrTotal').textContent = `${total} / ${rr.attrTotal}`; document.getElementById('attrLeft').textContent = Math.max(0, rr.attrTotal - total); document.getElementById('attrMax').textContent = rr.attrMax; document.getElementById('lineageBox').innerHTML = `<b>${esc(state.race)}</b>: Vida Base ${race().hp} · Deslocamento ${race().move}m · Capacidade ${race().capacity} espaços.<br><span class="small">Pontos de Linhagem: ${state.race === 'Humanos' ? ' +1 em dois Atributos à escolha' : ' +1 em dois Atributos definidos pela Raça'}.</span>` }
+function changeAttr(a, d) { const rr = rankRules(); const total = Object.values(state.attributes).reduce((s, v) => s + (+v || 0), 0); const v = attr(a); if (d > 0) { if (v >= rr.attrMax) return toast(`${a} já está no máximo para o Rank ${state.rank} (${rr.attrMax}).`); if (total >= rr.attrTotal) return toast(`Sem pontos de Atributo restantes no Rank ${state.rank}.`); } if (d < 0 && v <= 1) return; state.attributes[a] = v + d; renderAll(); save(true) }
+function renderRacialProfs() { const box = document.getElementById('racialProfBox'); box.innerHTML = ''; const all = ALL_SKILLS; if (state.race === 'Humanos') { box.innerHTML = '<div class="notice">Humanos escolhem duas Perícias diferentes como Proficiência Racial.</div><div class="grid2" style="margin-top:10px"></div>'; const grid = box.querySelector('.grid2'); for (let i = 0; i < 2; i++) { const s = document.createElement('select'); s.innerHTML = '<option value="">—</option>' + all.map(x => `<option>${esc(x)}</option>`).join(''); s.value = state.racialProfs[i] || ''; s.onchange = () => { state.racialProfs[i] = s.value; renderAll(); save(true) }; grid.appendChild(s) } } else { box.innerHTML = '<label>Área favorecida pela Raça</label><select id="racialProf"></select>'; setSelect('racialProf', race().profs, state.racialProfs[0] || ''); document.getElementById('racialProf').onchange = e => { state.racialProfs = [e.target.value, '']; renderAll(); save(true) } } }
+function sourceTags(skill) { const out = []; if (state.race === 'Humanos' && state.racialProfs.includes(skill)) out.push(['race', 'Raça']); if (state.race !== 'Humanos' && state.racialProfs[0] === skill) out.push(['race', 'Raça']); const v = vertent(); if (v[1] === skill) out.push(['vertent', 'Vertente']); if (state.specializations.includes(skill)) out.push(['spec', 'Especialização']); return out }
+
+function renderSkills() {
+  const g = document.getElementById('skillsGrid');
+  g.innerHTML = `
+      <div style="display:grid; grid-template-columns:1.2fr 65px 65px 65px; gap:8px; margin-bottom:10px; color:var(--muted); font-size:0.8rem; text-align:center;">
+          <div style="text-align:left; padding-left:10px;">Perícia</div>
+          <div>Invest.</div>
+          <div>Extra</div>
+          <div>Total</div>
+      </div>
+  `;
+  const rr = rankRules();
+  for (const [a, list] of Object.entries(DATA.skills)) {
+    const h = document.createElement('h3');
+    h.textContent = a;
+    g.appendChild(h);
+    for (const sk of list) {
+      const row = document.createElement('div');
+      row.className = 'skill-row';
+      const val = +state.skills[sk] || 0;
+      const extra = +state.skillExtras[sk] || 0;
+      const total = attr(a) + val + extra;
+      const tags = sourceTags(sk).map(t => `<span class="chip ${t[0]}">${t[1]}</span>`).join('');
+      row.innerHTML = `
+        <div>
+           <div class="skill-name">${esc(sk)}</div>
+           <div class="source-list">${tags || '<span class="small">Sem fonte especial registrada</span>'}</div>
+        </div>
+        <input type="number" title="Pontos do Rank investidos (Máx: ${attr(a) * 4})" min="0" max="${attr(a) * 4}" value="${val}" data-skill="${escA(sk)}">
+        <input type="number" title="Bônus / Reduções extras vindos de itens ou Buffs" value="${extra}" data-skextra="${escA(sk)}">
+        <div class="skill-total">${total}</div>
+      `;
+      g.appendChild(row);
+    }
+  }
+  g.querySelectorAll('[data-skill]').forEach(i => i.onchange = () => {
+    const sk = i.dataset.skill;
+    const a = Object.keys(DATA.skills).find(x => DATA.skills[x].includes(sk));
+    const max = attr(a) * 4;
+    const v = Math.max(0, Math.min(max, +i.value || 0));
+    const used = Object.values(state.skills).reduce((s, x) => s + (+x || 0), 0) - (+state.skills[sk] || 0);
+    state.skills[sk] = (used + v > rr.skillBudget) ? Math.max(0, rr.skillBudget - used) : v;
+    renderAll();
+    save(true);
+  });
+  g.querySelectorAll('[data-skextra]').forEach(i => i.onchange = () => {
+    const sk = i.dataset.skextra;
+    state.skillExtras[sk] = Number(i.value) || 0;
+    renderAll();
+    save(true);
+  });
+  document.getElementById('skillUsed').textContent = Object.values(state.skills).reduce((s, v) => s + (+v || 0), 0);
+  document.getElementById('skillBudget').textContent = rr.skillBudget;
+  setSelect('spec1', ALL_SKILLS, state.specializations[0] || '', true);
+  setSelect('spec2', ALL_SKILLS, state.specializations[1] || '', true);
+  document.getElementById('spec1').onchange = e => { state.specializations[0] = e.target.value; renderAll(); save(true) };
+  document.getElementById('spec2').onchange = e => { state.specializations[1] = e.target.value; renderAll(); save(true) };
+}
+
+function renderResource() {
+  const c = DATA.classes[state.class];
+  document.getElementById('resourceTitle').textContent = c.resource;
+  document.getElementById('resourceDesc').textContent = c.rule;
+  document.getElementById('resourceMax').textContent = c.max;
+  document.getElementById('resourceCurrentDisplay').textContent = state.resourceCurrent;
+  document.getElementById('resourceCurrentInput').max = c.max;
+  document.getElementById('resourceCurrentInput').value = state.resourceCurrent;
+  document.getElementById('resourceProgress').style.width = (c.max ? Math.min(100, state.resourceCurrent / c.max * 100) : 0) + '%';
+  document.getElementById('resourceHint').textContent = c.max ? `Faixa limite: 0–${c.max}.` : 'Operação direta por estados/posturas.';
+  const tools = document.getElementById('resourceTools');
+  tools.innerHTML = c.tools.map(x => `<div class="tool"><span>${esc(x)}</span></div>`).join('');
+}
+
+function renderCombat() {
+  // Checkbox Turnos
+  ['action', 'bonus', 'move', 'reaction'].forEach(k => {
+      const el = document.getElementById('turn_' + k);
+      if(el) {
+          el.checked = !!state.turn[k];
+          el.onchange = e => { state.turn[k] = e.target.checked; save(true); };
+      }
+  });
+
+  // Lista Armas
+  const wList = document.getElementById('combatWeaponsList');
+  if(wList) {
+      wList.innerHTML = '';
+      if(!state.combatWeapons.length) wList.innerHTML = '<div class="small" style="padding-left:10px;">Nenhuma arma de combate listada.</div>';
+      state.combatWeapons.forEach((w, idx) => {
+          const row = document.createElement('div');
+          row.className = 'inventory-row';
+          row.style.gridTemplateColumns = '1.2fr 80px 80px 1.5fr 80px';
+          row.innerHTML = `
+              <input type="text" placeholder="Arma (ex: Montante)" value="${escA(w.name)}">
+              <input type="text" placeholder="+Ataque" value="${escA(w.attack)}">
+              <input type="text" placeholder="Dano" value="${escA(w.damage)}">
+              <input type="text" placeholder="Efeito / Propriedade / Alcance" value="${escA(w.notes)}">
+              <button class="btn danger">Excluir</button>
+          `;
+          const ins = row.querySelectorAll('input');
+          ins[0].oninput = e => { w.name = e.target.value; save(true); };
+          ins[1].oninput = e => { w.attack = e.target.value; save(true); };
+          ins[2].oninput = e => { w.damage = e.target.value; save(true); };
+          ins[3].oninput = e => { w.notes = e.target.value; save(true); };
+          row.querySelector('button').onclick = () => {
+              state.combatWeapons.splice(idx, 1);
+              renderAll();
+              save(true);
+          };
+          wList.appendChild(row);
+      });
+  }
+
+  // Condições UI Avançada
+  const cGrid = document.getElementById('conditionsGrid');
+  if(cGrid) {
+      cGrid.innerHTML = '';
+      DATA.conditions.forEach(c => {
+          const val = state.conditions[c] || 0;
+          const defs = CONDITION_DEFS[c];
+          const card = document.createElement('div');
+          card.className = 'card condition-card';
+          card.innerHTML = `
+              <div style="font-weight:bold; color:var(--gold); margin-bottom:6px;">${esc(c)}</div>
+              <div style="display:flex; gap:10px; margin-bottom:8px; font-size:0.9rem;">
+                  <label style="cursor:pointer;"><input type="radio" name="cond_${c}" value="0" ${val===0?'checked':''}> Nulo</label>
+                  <label style="cursor:pointer; color:var(--text);"><input type="radio" name="cond_${c}" value="1" ${val===1?'checked':''}> I</label>
+                  <label style="cursor:pointer; color:var(--gold);"><input type="radio" name="cond_${c}" value="2" ${val===2?'checked':''}> II</label>
+                  <label style="cursor:pointer; color:var(--red);"><input type="radio" name="cond_${c}" value="3" ${val===3?'checked':''}> III</label>
+              </div>
+              <div class="small" style="color:var(--muted); border-top:1px solid var(--line); padding-top:6px; min-height:40px;">
+                  ${val > 0 ? defs[val-1] : 'Nenhum efeito ativo.'}
+              </div>
+          `;
+          card.querySelectorAll('input').forEach(rad => {
+              rad.onchange = e => {
+                  state.conditions[c] = parseInt(e.target.value);
+                  renderAll();
+                  save(true);
+              };
+          });
+          cGrid.appendChild(card);
+      });
+  }
+}
+
+function renderAbilities() {
+  const box = document.getElementById('abilitiesList');
+  box.innerHTML = '';
+  const rr = rankRules();
+  document.getElementById('powerLimit').textContent = rr.power;
+  
+  if (!state.abilities.length) box.innerHTML = '<div class="small">Nenhuma habilidade adicionada.</div>';
+  
+  state.abilities.forEach((a, i) => {
+    const el = document.createElement('div');
+    el.className = 'ability card';
+    el.innerHTML = `
+        <div style="display:flex; gap:10px; margin-bottom:10px;">
+            <input type="text" style="flex:1; font-weight:bold; font-size:1.15rem; color:var(--gold); border:1px solid var(--line); background:rgba(0,0,0,0.2);" placeholder="Nome da Habilidade" value="${escA(a.name || '')}">
+            <button class="btn danger" style="padding: 4px 12px;">Excluir</button>
+        </div>
+        <textarea placeholder="Cole aqui ou descreva livremente o que sua habilidade faz, alcance, danos e turnos..." style="min-height:90px; width:100%; border:1px solid var(--line); background:rgba(0,0,0,0.1); padding:10px;">${esc(a.notes || a.concept || '')}</textarea>
+    `;
+    el.querySelector('input').oninput = e => { state.abilities[i].name = e.target.value; save(true); };
+    el.querySelector('textarea').oninput = e => { 
+       state.abilities[i].notes = e.target.value;
+       state.abilities[i].concept = ""; // limpeza legacy
+       save(true); 
+    };
+    el.querySelector('button').onclick = () => {
+        state.abilities.splice(i, 1);
+        renderAll();
+        save(true);
+    };
+    box.appendChild(el);
+  });
+}
+
+function renderInventory() {
+  const d = derived();
+  document.getElementById('capBase').textContent = d.cap;
+  document.getElementById('capBonus').textContent = d.capBonus;
+  document.getElementById('capTotal').textContent = d.cap + d.capBonus;
+  document.getElementById('capUsed').textContent = d.used;
+  document.getElementById('capacityTop').textContent = `${d.used}/${d.cap + d.capBonus}`;
+  document.getElementById('capStatus').innerHTML = d.used > d.cap + d.capBonus ? '<div class="warn">Sobrecarga: espaços usados acima da capacidade total.</div>' : '<div class="ok">Carga dentro do limite.</div>';
+  
+  const cont = document.getElementById('inventoryContainer');
+  cont.innerHTML = '';
+  
+  const categories = ["Armas", "Armaduras", "Consumíveis", "Geral"];
+
+  categories.forEach(cat => {
+      const items = state.inventory.map((item, index) => ({ item, index })).filter(x => x.item.type === cat);
+      
+      const sec = document.createElement('div');
+      sec.style.marginBottom = '25px';
+      sec.innerHTML = `<h3 style="color:var(--blue); border-bottom:1px solid var(--line); padding-bottom:6px; margin-bottom:10px;">${cat}</h3>`;
+
+      if (items.length === 0) {
+          sec.innerHTML += `<div class="small" style="padding-left:5px; margin-bottom:5px;">Nenhum item adicionado à categoria ${cat}.</div>`;
+      } else {
+          const head = document.createElement('div');
+          head.className = 'inventory-head';
+          head.style.gridTemplateColumns = '1fr 60px 60px 80px 100px 80px';
+          head.innerHTML = `<div>Nome do Item</div><div>Esp.</div><div>Qtd.</div><div>+Capac.</div><div>Categoria</div><div></div>`;
+          sec.appendChild(head);
+
+          items.forEach(x => {
+              const row = document.createElement('div');
+              row.className = 'inventory-row';
+              row.style.gridTemplateColumns = '1fr 60px 60px 80px 100px 80px';
+              row.innerHTML = `
+                  <input type="text" value="${escA(x.item.name)}" placeholder="Nome do item">
+                  <input type="number" min="0" value="${x.item.spaces}" title="Espaços Ocupados">
+                  <input type="number" min="1" value="${x.item.qty}" title="Quantidade">
+                  <input type="number" min="0" value="${x.item.capacityBonus}" title="Se for um recipiente, bônus de Carga (Capac.)">
+                  <select>
+                      ${categories.map(c => `<option ${c===x.item.type?'selected':''}>${c}</option>`).join('')}
+                  </select>
+                  <button class="btn danger">Excluir</button>
+              `;
+              const ins = row.querySelectorAll('input');
+              const sel = row.querySelector('select');
+              ins[0].oninput = e => { state.inventory[x.index].name = e.target.value; save(true); };
+              ins[1].onchange = e => { state.inventory[x.index].spaces = Math.max(0, +e.target.value||0); renderAll(); save(true); };
+              ins[2].onchange = e => { state.inventory[x.index].qty = Math.max(1, +e.target.value||1); renderAll(); save(true); };
+              ins[3].onchange = e => { state.inventory[x.index].capacityBonus = Math.max(0, +e.target.value||0); renderAll(); save(true); };
+              sel.onchange = e => { state.inventory[x.index].type = e.target.value; renderAll(); save(true); };
+              row.querySelector('button').onclick = () => {
+                  state.inventory.splice(x.index, 1);
+                  renderAll();
+                  save(true);
+              };
+              sec.appendChild(row);
+          });
+      }
+      cont.appendChild(sec);
+  });
+}
+
+function renderSummary() { const d = derived(); document.getElementById('hpMax').textContent = d.hp; document.getElementById('defense').textContent = d.def; document.getElementById('move').textContent = d.move + 'm'; document.getElementById('manaMax').textContent = d.mana; document.getElementById('lantoMax').textContent = d.lanto; document.getElementById('powerCurrentLabel').textContent = state.source + ' Atual'; const pm = state.source === 'Mana' ? d.mana : d.lanto; if (state.powerCurrent > pm) state.powerCurrent = pm; if (state.hpCurrent > d.hp) state.hpCurrent = d.hp; document.getElementById('sourceLabel').textContent = state.source; document.getElementById('expressionLabel').textContent = state.expression; syncInputs() }
+function renderAll() { renderBuildSelects(); renderSummary(); renderAttributes(); renderRacialProfs(); renderSkills(); renderResource(); renderCombat(); renderAbilities(); renderInventory(); syncInputs() }
+
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => { document.querySelectorAll('.tab').forEach(x => x.classList.remove('active')); t.classList.add('active'); document.querySelectorAll('.tab-pane').forEach(x => x.classList.add('hidden')); document.getElementById('tab-' + t.dataset.tab).classList.remove('hidden') });
+document.getElementById('saveBtn').onclick = () => save(false); document.getElementById('printBtn').onclick = () => window.print();
+document.getElementById('resourceMinus').onclick = () => { state.resourceCurrent = Math.max(0, state.resourceCurrent - 1); renderAll(); save(true) };
+document.getElementById('resourcePlus').onclick = () => { state.resourceCurrent = Math.min(DATA.classes[state.class].max, state.resourceCurrent + 1); renderAll(); save(true) };
+document.getElementById('addItemBtn').onclick = () => { state.inventory.push({ name: '', spaces: 1, qty: 1, capacityBonus: 0, type: 'Geral' }); renderAll(); save(true) };
+document.getElementById('addAbilityBtn').onclick = () => { state.abilities.push({ name: '', notes: '' }); renderAll(); save(true) };
+document.getElementById('newBtn').onclick = () => { if (confirm('Começar uma nova ficha? Exporte a atual antes se quiser mantê-la.')) { state = clone(BLANK); save(true); renderAll(); toast('Nova ficha criada.') } };
+document.getElementById('resetTurnBtn').onclick = () => { ['action', 'bonus', 'move', 'reaction'].forEach(k => state.turn[k] = false); renderAll(); save(true); toast('Turno resetado.'); }
+document.getElementById('addWeaponBtn').onclick = () => { state.combatWeapons.push({ name: '', attack: '', damage: '', notes: '' }); renderAll(); save(true); };
+document.getElementById('resourceCurrentInput').onchange = e => { state.resourceCurrent = Math.max(0, Math.min(DATA.classes[state.class].max, +e.target.value || 0)); renderAll(); save(true) };
+document.getElementById('importInput').onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { try { state = normalize(JSON.parse(r.result)); save(true); renderAll(); toast('Ficha importada com sucesso.') } catch { toast('JSON inválido.') } }; r.readAsText(f); e.target.value = '' };
+document.getElementById('exportBtn').onclick = () => { save(true); const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = (state.name || 'ficha').replace(/[^\wÀ-ÿ-]+/g, '_') + '_Faces_do_Abismo.json'; a.click(); URL.revokeObjectURL(a.href); toast('JSON exportado.') };
+
+bind(); renderAll(); setInterval(() => save(true), 10000);
+</script>
+</body>
+</html>
